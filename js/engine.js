@@ -79,7 +79,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -119,7 +119,7 @@ var Engine = (function(global) {
             row, col;
 
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -139,6 +139,18 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+    }
+
+
+    function checkCollisions() {
+        allEnemies.forEach(enemy => {
+            if (Math.abs(enemy.x - player.x) < 60 && Math.abs(enemy.y - player.y) < 20) {
+                player.x = 200;
+                player.y = 387;
+                player.posX = 3;
+                player.posY = 1;
+            }
+        });
     }
 
     /* This function is called by the render function and is called on each game
